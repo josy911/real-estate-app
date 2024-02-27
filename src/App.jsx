@@ -1,17 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
-  fetchProperties();
-});
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import Profile from "./pages/Profile";
+import About from "./pages/About";
+import SignIn from "./pages/Signin";
 
-function fetchProperties() {
-  fetch("http://localhost:3000/properties")
-    .then((response) => response.json())
-    .then((data) => {
-      const propertiesElement = document.getElementById("properties");
-      propertiesElement.innerHTML = ""; // Clear existing properties
-      data.forEach((property) => {
-        const propertyElement = document.createElement("div");
-        propertyElement.textContent = `ID: ${property.id}, Address: ${property.address}, Occupied: ${property.occupied}`;
-        propertiesElement.appendChild(propertyElement);
-      });
-    });
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
